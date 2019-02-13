@@ -1,5 +1,12 @@
+/*
+ * Dependency modules:
+ */
 var express = require('express');
 var config = require('./config.json');
+
+/*
+ * Global Vars:
+ */
 var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const PORT = 5000;
 // This is a variable in case the service's URL ever gets blacklisted.
@@ -138,11 +145,34 @@ app.get('/delete/', (req, res) => {
 app.listen(PORT, () => {
     // Confirms successful server start.
     console.log('PseudonameAPI has started.');
-    // logs all the configuration details from ./config.json
+    // Logs all the configuration details from ./config.json
     console.log('Configuration: ' + JSON.stringify(config, null, -1));
-    // Check for dependencies
-    if (!config.apiKey) {
-        console.log('~~~~~~~~~~ ERROR: Missing dependency: apiKey ~~~~~~~~~~')
+
+    if(!dependencyCheck()) {
+        console.log('❌ Dependency check failed.\nExiting process.');
+        process.exit(1);
     }
-    console.log('PseudonameAPI is ready and is listening on port: ' + PORT);
+    console.log('✅ Dependency check was successful.\nPseudonameAPI is now accepting requests on port: '+ PORT);
 });
+
+function dependencyCheck(){
+    // The list of required dependencies.
+    var configDependencies = ['apiKey'];
+    var hasAllDependencies = true;
+
+    // Check for dependencies
+    console.log('Performing dependency check...');
+    // Convert config.json to string.
+    var stringifiedConfig = JSON.stringify(config);
+    // Create a JSON object with the config keys/values.
+    var parsedConfig = JSON.parse(stringifiedConfig);
+
+    for(var i in configDependencies){
+        // Check that the config JSON object has a key for each dependency.
+        if(!parsedConfig.hasOwnProperty(configDependencies[i])){
+            hasAllDependencies = false;
+            console.log('Missing dependency: '+configDependencies[i]+'.Be sure that the config.json file includes an entry for this element.')
+        }
+    }
+    return hasAllDependencies;
+}
