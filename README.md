@@ -57,6 +57,7 @@ node index.js
 | `/delete/` | GET | This route is used to delete aliases. | Yes |
 
 When using a route that requires parameters, the follow parameters must be included in the request. If these parameters are not provided, the request will be refused:
+
 | Parameter Name (as it must be sent to the API) | Parameter Information | Example Parameter Value |
 |:----------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
 | alias | This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ **Please do not include the `@` sign within the alias.**  | myalias |
