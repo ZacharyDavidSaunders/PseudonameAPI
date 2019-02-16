@@ -60,7 +60,7 @@ router.get('/add/', middlewares.checkParamsMiddleware, (req, res) => {
 
 // Delete alias route
 router.get('/delete/', middlewares.checkParamsMiddleware, (req, res) => {
-    console.log('Delete request recieved from: ' + req.ip);
+    console.log('Delete request received from: ' + req.ip);
     var realEmail = req.query.realEmail;
     var alias = req.query.alias;
     var xhttp = new XMLHttpRequest();

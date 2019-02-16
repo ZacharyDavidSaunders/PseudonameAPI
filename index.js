@@ -55,3 +55,5 @@ function dependencyCheck(){
     }
     return hasAllDependencies;
 }
+
+module.exports = app; //For unit-testing

@@ -67,9 +67,12 @@ When using a route that requires parameters, the follow parameters must be inclu
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
 
 PseudonameAPI utilizes the following open source libraries:
-* [node.js] -- A javascript-based, evented input/output framework for the backend.
+* [Node.js] -- A javascript-based, evented input/output framework for the backend.
 * [Express] -- A fast node.js network application framework.
 * [XMLHTTPRequest] -- A wrapper that emulates the web browser's native Javascript XMLHttpRequest object and functionalities.
+* [Mocha] -- A feature-rich JavaScript unit-testing framework.
+* [Chai] -- A BDD (Behaviour-Driven Development) / TDD (Test-Driven-Development) assertion library for node.
+* [Chai-HTTP] -- A Chai plugin that enables Chai assertions to integrate with HTTP operations.
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
@@ -92,13 +95,15 @@ You'll find information about each release below.
 * Added parameter checking middleware.
 * Added dependency checker.
 * Added internal versioning.
+* Added Mocha/Chai unit tests.
+* Addded API documentation in the README.
 
 ## License
 
 [Mozilla Public License 2.0]
 
-   [node.js]: <http://nodejs.org>
-   [express]: <http://expressjs.com>
+   [Node.js]: <http://nodejs.org>
+   [Express]: <http://expressjs.com>
    [ForwardMX]: <https://forwardmx.io/>
    [logo]: https://i.imgur.com/SSY4Rq3.jpg
    [PseudonameAPI Diagram]: https://i.imgur.com/Y5fKw3d.jpg
@@ -107,3 +112,6 @@ You'll find information about each release below.
    [Pseudoname site]: https://pseudoname.io
    [Postman]:https://www.getpostman.com/
    [XMLHTTPRequest]:https://www.npmjs.com/package/xmlhttprequest
+   [Mocha]:https://mochajs.org/
+   [Chai]:https://www.chaijs.com/
+   [Chai-HTTP]:https://www.chaijs.com/plugins/chai-http/

@@ -4,7 +4,7 @@
   "description": "The API that the pseudoname.io site relies upon.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": " mocha --recursive --exit",
     "start": "index.js"
   },
   "repository": {
@@ -25,7 +25,10 @@
   },
   "homepage": "https://github.com/ZacharyDavidSaunders/PseudonameAPI#readme",
   "dependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.2.1",
     "express": "^4.16.4",
+    "mocha": "^5.2.0",
     "xmlhttprequest": "^1.8.0"
   }
 }
