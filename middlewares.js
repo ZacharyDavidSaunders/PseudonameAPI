@@ -2,7 +2,7 @@ function checkParamsMiddleware(req, res, next) {
     var requiredParams = ['alias','realEmail'];
     var hasRequiredParams = true;
     for(var i in requiredParams){
-        // Checks that API supplies the required params
+        // Checks that the API request supplies the required params.
         if(!req.query[requiredParams[i]]){
             hasRequiredParams = false;
         }
