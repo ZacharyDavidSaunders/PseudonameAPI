@@ -19,26 +19,48 @@ PseudonameAPI is very easy to install and launch.
 1.  Download the latest release from the [Releases Page][Releases Page].
 2.  _(Optional)_ If you haven't already, download and install [node.js].
 3.  Open your terminal of choice.
-4.  Move into the project's directory via
+4.  Move into the project's directory via:
 ```sh
 cd Downloads/PseudonameAPI
 ```
-5.  Install express by running the following command:
+5.  Install the dependency node modules by running the following command:
 ```sh
-npm install express
+npm install
 ```
 _Note: When prompted, you may need to provide administrator credentials to complete the installation._
-6.  Run the dependency checker via:
+6. In the project's directory, create an empty `config.json` file and save it. This file will hold API keys and other sensitive information that was redacted from the git repository.
+
+7.  Run the dependency checker via the command:
 ```sh
 node index.js
 ```
-7.  You will get an error message with a list of required dependencies. Create a basic (non-nested) json file in the project's directory and name it `config.json` In this file, create a key/value pair for each required dependency. _(This is a great time to get a [ForwardMX] API key, if you don't already have one!)_
+You will get an error message with a list of required dependencies. Go back to the `config.json` file and create a key/value pair for each required dependency. _(This is a great time to get a [ForwardMX] API key, if you don't already have one!)_
+
+Example `config.json`:
+```json
+{
+    "dependencyName":"value"
+}
+```
 8. Save the `config.json` file.
-9.  Start the server via
+9. Start the server via:
 ```sh
 node index.js
 ```
 10. _(Optional)_ You can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
+
+## Supported Routes:
+
+| Route: | HTTP Method: | Usage: | Requires Parameters? |
+|:----------:|:------------:|:-------------------------------------:|:--------------------:|
+| `/add/` | GET | This route is used to create aliases. | Yes |
+| `/delete/` | GET | This route is used to delete aliases. | Yes |
+
+When using a route that requires parameters, the follow parameters must be included in the request. If these parameters are not provided, the request will be refused:
+| Parameter Name (as it must be sent to the API) | Parameter Information | Example Parameter Value |
+|:----------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
+| alias | This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ **Please do not include the `@` sign within the alias.**  | myalias |
+| realEmail | This is the real email address in which the emails destined to the aliases will be forwarded to. | example@gmail.com |
 
 ## Dependencies
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
@@ -46,6 +68,7 @@ In order to make use of the PseudonameAPI, a paid [ForwardMX] account is require
 PseudonameAPI utilizes the following open source libraries:
 * [node.js] -- A javascript-based, evented input/output framework for the backend.
 * [Express] -- A fast node.js network application framework.
+* [XMLHTTPRequest] -- A wrapper that emulates the web browser's native Javascript XMLHttpRequest object and functionalities.
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
@@ -54,9 +77,20 @@ PseudonameAPI utilizes the following open source libraries:
 Pull requests are welcome and will be reviewed in a case-by-case basis. If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
+ - Add a version checking route/response. This can be used as a quick method to verify API connectivity too. --  _(Coming Soon!)_
+ - Add server-side input validation/sanitation.
+ - Add logging, via a middleware.
+ - Add an API key system, via a middleware.
+ - Limit the IPs that can make use of the service, via a middleware.
+ - Explore the possibility of encryption. --  _(This may require collaboration with ForwardMX)_
 
- - Add server-side input validation/sanitation. -- _(Coming Soon!)_
- - Explore the possibility of encryption. -- _(This may require collaboration with ForwardMX)_
+## Release Notes
+You'll find information about each release below.
+#### Version 1.0
+* Built basic `/add/` and `/delete/` routes.
+* Added parameter checking middleware.
+* Added dependency checker.
+* Added internal versioning.
 
 ## License
 
@@ -71,3 +105,4 @@ Pull requests are welcome and will be reviewed in a case-by-case basis. If a Pul
    [Releases Page]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/releases
    [Pseudoname site]: https://pseudoname.io
    [Postman]:https://www.getpostman.com/
+   [XMLHTTPRequest]:https://www.npmjs.com/package/xmlhttprequest

@@ -7,7 +7,6 @@ function checkParamsMiddleware(req, res, next) {
             hasRequiredParams = false;
         }
     }
-
     if(hasRequiredParams){
         next();
     }else{

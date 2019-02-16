@@ -148,7 +148,7 @@ app.listen(PORT, () => {
 
 function dependencyCheck(){
     // The list of required dependencies.
-    var configDependencies = ['apiKey'];
+    var configDependencies = ['forwardMxApiKey'];
     var hasAllDependencies = true;
 
     // Check for dependencies
@@ -162,7 +162,7 @@ function dependencyCheck(){
         // Check that the config JSON object has a key for each dependency.
         if(!parsedConfig.hasOwnProperty(configDependencies[i])){
             hasAllDependencies = false;
-            console.log('Missing dependency: '+configDependencies[i]+'.Be sure that the config.json file includes an entry for this element.')
+            console.log('Missing dependency: \''+configDependencies[i]+'\'. Please be sure that the config.json file includes a JSON key/value pair for this element.')
         }
     }
     return hasAllDependencies;
