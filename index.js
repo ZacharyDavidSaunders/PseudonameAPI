@@ -6,14 +6,17 @@ var express = require('express');
 /*
  * Dependency files:
  */
-var config = require('./config.json');
 // require('./routes.js'); This file is also required, but is bound in the express 'app' object below.
 
 /*
  * Global Vars:
  */
 // The API's version
-const VERSION = '1.0';
+var VERSION = '1.0';
+var DOMAIN = "pseudoname.io";
+var NAME = "PseudonameAPI";
+var PORT = 5000;
+var forwardMxApiKey = process.env.forwardMxApiKey;
 
 //<-----------END OF DEFINITIONS----------->
 
@@ -21,39 +24,34 @@ const VERSION = '1.0';
 const app = express();
 app.use(require('./routes.js'));
 
-app.listen(config.port, () => {
+app.listen(PORT, () => {
     // Confirms successful server start.
-    console.log(config.name+'(v'+VERSION+') has started.');
-    // Logs all the configuration details from ./config.json
-    console.log('Configuration: ' + JSON.stringify(config, null, -1));
-
+    console.log(NAME+'(v'+VERSION+') has started.');
+    console.log("forwardMxApiKey = "+forwardMxApiKey);
     if(!dependencyCheck()) {
         console.log('❌ Dependency check failed.\nExiting process.');
         process.exit(1);
     }
-    console.log('✅ Dependency check was successful.\n'+config.name+' is now accepting requests on port: '+ config.port);
+    console.log('✅ Dependency check was successful.\n'+NAME+' is now accepting requests on port: '+ PORT);
 });
 
 function dependencyCheck(){
     // The list of required dependencies.
-    var configDependencies = ['forwardMxApiKey','domain','name','port'];
+    var environmentVariableDependencies = ['forwardMxApiKey'];
     var hasAllDependencies = true;
 
     // Check for dependencies
     console.log('Performing dependency check...');
-    // Convert config.json to string.
-    var stringifiedConfig = JSON.stringify(config);
-    // Create a JSON object with the config keys/values.
-    var parsedConfig = JSON.parse(stringifiedConfig);
-
-    for(var i in configDependencies){
-        // Check that the config JSON object has a key for each dependency.
-        if(!parsedConfig.hasOwnProperty(configDependencies[i])){
+    for(var i in environmentVariableDependencies){
+        if(!process.env[environmentVariableDependencies[i]]){
             hasAllDependencies = false;
-            console.log('Missing dependency: \''+configDependencies[i]+'\'. Please be sure that the config.json file includes a JSON key/value pair for this element.')
+            console.log('Missing dependency: \''+environmentVariableDependencies[i]+'\'. Please be sure that the system has an environment variable set for this element.')
         }
     }
     return hasAllDependencies;
 }
 
-module.exports = app; //For unit-testing
+module.exports.app = app; //For unit-testing
+module.exports.DOMAIN = DOMAIN;
+module.exports.PORT = PORT;
+module.exports.forwardMxApiKey = forwardMxApiKey;

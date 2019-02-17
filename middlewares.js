@@ -17,6 +17,4 @@ function checkParamsMiddleware(req, res, next) {
     }
 }
 
-module.exports = {
-    checkParamsMiddleware : checkParamsMiddleware
-}
+module.exports.checkParamsMiddleware = checkParamsMiddleware;

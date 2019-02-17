@@ -8,7 +8,7 @@ var XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
  * Dependency files:
  */
 var middlewares = require("./middlewares");
-var config = require('./config.json');
+var index = require("./index");
 
 /*
  * Global Vars:
@@ -49,12 +49,12 @@ router.get('/add/', middlewares.checkParamsMiddleware, (req, res) => {
         }
     };
     xhttp.open('POST', ('https://forwardmx.io/api/alias/create?' +
-        '&key=' + config.forwardMxApiKey +
-        '&domain=' + config.domain +
+        '&key=' + index.forwardMxApiKey +
+        '&domain=' + index.DOMAIN +
         '&destination=' + realEmail +
         '&alias=' + alias), true);
-    xhttp.setRequestHeader('x-requested-with', config.domain);
-    console.log('The following external API was called: https://forwardmx.io/api/alias/create?&key=' + config.forwardMxApiKey + '&domain=' + config.domain + '&destination=' + realEmail + '&alias=' + alias);
+    xhttp.setRequestHeader('x-requested-with', index.DOMAIN);
+    console.log('The following external API was called: https://forwardmx.io/api/alias/create?&key=' + index.forwardMxApiKey + '&domain=' + index.DOMAIN + '&destination=' + realEmail + '&alias=' + alias);
     xhttp.send();
 });
 
@@ -102,11 +102,11 @@ router.get('/delete/', middlewares.checkParamsMiddleware, (req, res) => {
                             }
                         };
                         xhttp.open('POST', ('https://forwardmx.io/api/alias/destroy?' +
-                            '&key=' + config.forwardMxApiKey +
+                            '&key=' + index.forwardMxApiKey +
                             '&alias=' + alias +
-                            '&domain=' + config.domain), true);
-                        xhttp.setRequestHeader('x-requested-with', config.domain);
-                        console.log('The following external API was called: https://forwardmx.io/api/alias/destroy?&key=' + config.forwardMxApiKey + '&alias=' + alias + '&domain=' + config.domain);
+                            '&domain=' + index.DOMAIN), true);
+                        xhttp.setRequestHeader('x-requested-with', index.DOMAIN);
+                        console.log('The following external API was called: https://forwardmx.io/api/alias/destroy?&key=' + index.forwardMxApiKey + '&alias=' + alias + '&domain=' + index.DOMAIN);
                         xhttp.send();
                         // Occurs when the provided alias does not belong to the provided alias.
                     } else {
@@ -121,10 +121,10 @@ router.get('/delete/', middlewares.checkParamsMiddleware, (req, res) => {
         }
     };
     xhttp.open('POST', ('https://forwardmx.io/api/aliases?' +
-        '&key=' + config.forwardMxApiKey +
-        '&domain=' + config.domain), true);
-    xhttp.setRequestHeader('x-requested-with', config.domain);
-    console.log('The following external API was called: https://forwardmx.io/api/aliases?&key=' + config.forwardMxApiKey + '&domain=' + config.domain);
+        '&key=' + index.forwardMxApiKey +
+        '&domain=' + index.DOMAIN), true);
+    xhttp.setRequestHeader('x-requested-with', index.DOMAIN);
+    console.log('The following external API was called: https://forwardmx.io/api/aliases?&key=' + index.forwardMxApiKey + '&domain=' + index.DOMAIN);
     xhttp.send();
 });
 

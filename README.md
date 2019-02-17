@@ -28,26 +28,36 @@ cd Downloads/PseudonameAPI
 npm install
 ```
 _Note: When prompted, you may need to provide administrator credentials to complete the installation._
-6. In the project's directory, create an empty `config.json` file and save it. This file will hold API keys and other sensitive information that was redacted from the git repository.
 
-7.  Run the dependency checker via the command:
+6.  Run the dependency checker via the command:
 ```sh
 node index.js
 ```
-You will get an error message with a list of required dependencies. Go back to the `config.json` file and create a key/value pair for each required dependency. _(This is a great time to get a [ForwardMX] API key, if you don't already have one!)_
 
-Example `config.json`:
-```json
-{
-    "dependencyName":"value"
-}
+7.  You will get an error message with a list of required environment variables. For each of these elements, create an environment variable within your system. On a Mac, this is done via:
+```sh
+export <variableName>=<variableValue>
 ```
-8. Save the `config.json` file.
-9. Start the server via:
+_Note: If you make a mistake, you can reverse this action by running:_
+```sh
+unset <variableName>
+```
+Once complete, verify that the environment variables have been set correctly by viewing your environment variables. Again, using a Mac as an example:
+```sh
+env
+```
+8. Start the server via:
 ```sh
 node index.js
 ```
-10. _(Optional)_ You can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
+9. _(Optional)_ Once the server is running, you can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
+
+## Tests
+Mocha/Chai unit tests have been provided within the [`/test/`][/test/] directory. The test files mirror the application files, i.e [`/test/test.middlewares.js`][/test/test.middlewares.js] tests the functionality of the [`middlewares.js`][middlewares.js] file. Run all the tests via:
+
+```sh
+npm test
+```
 
 ## Supported Routes:
 
@@ -67,18 +77,19 @@ When using a route that requires parameters, the follow parameters must be inclu
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
 
 PseudonameAPI utilizes the following open source libraries:
-* [Node.js] -- A javascript-based, evented input/output framework for the backend.
-* [Express] -- A fast node.js network application framework.
-* [XMLHTTPRequest] -- A wrapper that emulates the web browser's native Javascript XMLHttpRequest object and functionalities.
-* [Mocha] -- A feature-rich JavaScript unit-testing framework.
-* [Chai] -- A BDD (Behaviour-Driven Development) / TDD (Test-Driven-Development) assertion library for node.
-* [Chai-HTTP] -- A Chai plugin that enables Chai assertions to integrate with HTTP operations.
+* [Node.js] — A Javascript-based, evented input/output framework for the backend.
+* [Express] — A fast node.js network application framework.
+* [XMLHTTPRequest] — A wrapper that emulates the web browser's native Javascript XMLHttpRequest object and functionalities.
+* [Mocha] — A feature-rich JavaScript unit-testing framework.
+* [Chai] — A BDD (Behavior-Driven Development) / TDD (Test-Driven-Development) assertion library for node.
+* [Chai-HTTP] — A Chai plug-in that enables Chai assertions to integrate with HTTP operations.
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
 ## Pull Requests / Contributions
 
-Pull requests are welcome and will be reviewed in a case-by-case basis. If a Pull Request is urgent, please send an email to contactus@pseudoname.io
+Pull requests are welcome and will be reviewed and merged in a case-by-case basis. When submitting a PR, please update the tests as well.
+If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
  - Add a version checking route/response. This can be used as a quick method to verify API connectivity too. --  _(Coming Soon!)_
@@ -96,15 +107,15 @@ You'll find information about each release below.
 * Added dependency checker.
 * Added internal versioning.
 * Added Mocha/Chai unit tests.
-* Addded API documentation in the README.
+* Added API documentation in the README.
 
 ## License
 
 [Mozilla Public License 2.0]
 
-   [Node.js]: <http://nodejs.org>
-   [Express]: <http://expressjs.com>
-   [ForwardMX]: <https://forwardmx.io/>
+   [Node.js]: http://nodejs.org
+   [Express]: http://expressjs.com
+   [ForwardMX]: https://forwardmx.io/
    [logo]: https://i.imgur.com/SSY4Rq3.jpg
    [PseudonameAPI Diagram]: https://i.imgur.com/Y5fKw3d.jpg
    [Mozilla Public License 2.0]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/LICENSE
@@ -115,3 +126,6 @@ You'll find information about each release below.
    [Mocha]:https://mochajs.org/
    [Chai]:https://www.chaijs.com/
    [Chai-HTTP]:https://www.chaijs.com/plugins/chai-http/
+   [middlewares.js]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/middlewares.js
+   [/test/test.middlewares.js]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/test/test.middlewares.js
+   [/test/]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/tree/master/test
