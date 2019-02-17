@@ -26,13 +26,14 @@ app.use(require('./routes.js'));
 
 app.listen(PORT, () => {
     // Confirms successful server start.
-    console.log(NAME+'(v'+VERSION+') has started.');
-    console.log("forwardMxApiKey = "+forwardMxApiKey);
+    console.log('\x1b[7m',NAME+'(v'+VERSION+') has started.','\x1b[0m');
     if(!dependencyCheck()) {
-        console.log('❌ Dependency check failed.\nExiting process.');
+        console.log('\x1b[37m\x1b[41m\x1b[1m','Dependency check failed.','\x1b[0m');
+        console.log('Exiting process.');
         process.exit(1);
     }
-    console.log('✅ Dependency check was successful.\n'+NAME+' is now accepting requests on port: '+ PORT);
+    console.log('\x1b[42m\x1b[30m\x1b[1m','Dependency check was successful.','\x1b[0m');
+    console.log(NAME+' is now accepting requests on port: '+ PORT);
 });
 
 function dependencyCheck(){
@@ -41,7 +42,7 @@ function dependencyCheck(){
     var hasAllDependencies = true;
 
     // Check for dependencies
-    console.log('Performing dependency check...');
+    console.log('\x1b[43m\x1b[30m','Performing dependency check.....','\x1b[0m');
     for(var i in environmentVariableDependencies){
         if(!process.env[environmentVariableDependencies[i]]){
             hasAllDependencies = false;
