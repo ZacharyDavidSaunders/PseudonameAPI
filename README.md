@@ -1,6 +1,6 @@
 ![Pseudoname_API][logo]
 
-[![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/LICENSE) [![Pseudoname](https://img.shields.io/website-Online-Offline-limeGreen-red/https/pseudoname.io.svg?label=Pseudoname%20Website&style=flat)](https://pseudoname.io)
+[![Build Status](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI.svg?token=hxEQFjRhm1AWTqMMrsDR&branch=master)](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI) [![Pseudoname](https://img.shields.io/website-Online-Offline-limeGreen-red/https/pseudoname.io.svg?label=Pseudoname%20Website&style=flat)](https://pseudoname.io) [![License: MPL 2.0](https://img.shields.io/badge/License-MPL%202.0-brightgreen.svg)](https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/LICENSE)
 
 ## What is "PseudonameAPI"?
 
@@ -59,7 +59,13 @@ Mocha/Chai unit tests have been provided within the [`/test/`][/test/] directory
 npm test
 ```
 
-## Supported Routes:
+## Continuous Integration
+
+Travis CI is used for continuous integration, the project page can be viewed [here.][Travis CI Project Page] Each merge into master and each Pull Request is automatically tested. The following badge (which is also located at the top of this README document) displays the current build status: [![Build Status](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI.svg?token=hxEQFjRhm1AWTqMMrsDR&branch=master)](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI)
+
+![Travis CI][Travis CI Logo]
+
+## Supported Routes
 
 | Route: | HTTP Method: | Usage: | Requires Parameters? |
 |:----------:|:------------:|:-------------------------------------:|:--------------------:|
@@ -86,18 +92,20 @@ PseudonameAPI utilizes the following open source libraries:
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
+![Logo Mashup]
+
 ## Pull Requests / Contributions
 
 Pull requests are welcome and will be reviewed and merged in a case-by-case basis. When submitting a PR, please update the tests as well.
 If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
- - Add a version checking route/response. This can be used as a quick method to verify API connectivity too. --  _(Coming Soon!)_
+ - Add a version checking route/response. This can be used as a quick method to verify API connectivity too. —  _(Coming Soon!)_
  - Add server-side input validation/sanitation.
  - Add logging, via a middleware.
  - Add an API key system, via a middleware.
  - Limit the IPs that can make use of the service, via a middleware.
- - Explore the possibility of encryption. --  _(This may require collaboration with ForwardMX)_
+ - Explore the possibility of encryption. —  _(This may require collaboration with ForwardMX)_
 
 ## Release Notes
 You'll find information about each release below.
@@ -108,6 +116,7 @@ You'll find information about each release below.
 * Added internal versioning.
 * Added Mocha/Chai unit tests.
 * Added API documentation in the README.
+* Added Travis CI support.
 
 ## License
 
@@ -129,3 +138,6 @@ You'll find information about each release below.
    [middlewares.js]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/middlewares.js
    [/test/test.middlewares.js]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/test/test.middlewares.js
    [/test/]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/tree/master/test
+   [Travis CI Project Page]:https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI
+   [Travis CI Logo]:https://felixrieseberg.gallerycdn.vsassets.io/extensions/felixrieseberg/vsc-travis-ci-status/1.1.0/1489588030200/Microsoft.VisualStudio.Services.Icons.Default
+   [Logo Mashup]:https://developerhowto.com/wp-content/uploads/2018/12/node-express-mocha-chai.png
