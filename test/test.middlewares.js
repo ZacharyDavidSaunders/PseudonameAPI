@@ -99,4 +99,32 @@ describe('Middleware Tests:', function() {
 
         });
     });
+    describe ('validateParamsMiddleware Tests', function(){
+        describe('Trying to submit a request with an invalid alias' ,function(){
+            it('should be rejected with a message as to why',(done) => {
+                chai.request('localhost:'+index.PORT)
+                    .get('/add/?alias=@alias&realEmail=test@gmail.com')
+                    .send()
+                    .end((err, res) => {
+                        expect(res.status).to.deep.equal(422);
+                        expect(res.body).to.have.property('success', 'FALSE');
+                        expect(res.body).to.have.property('message', 'Error: The supplied alias parameter is invalid. Please be sure that it does not contain an \'@\' symbol.');
+                        done();
+                    });
+            });
+        });
+        describe('Trying to submit a request with an invalid email' ,function(){
+            it('should be rejected with a message as to why',(done) => {
+                chai.request('localhost:'+index.PORT)
+                    .get('/add/?alias=alias111&realEmail=test')
+                    .send()
+                    .end((err, res) => {
+                        expect(res.status).to.deep.equal(422);
+                        expect(res.body).to.have.property('success', 'FALSE');
+                        expect(res.body).to.have.property('message', 'Error: The supplied realEmail parameter is invalid.');
+                        done();
+                    });
+            });
+        });
+    });
 });

@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 });
 
 // Add alias route
-router.get('/add/', middlewares.checkParamsMiddleware, (req, res) => {
+router.get('/add/', [middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
     console.log('Add request received from: ' + req.ip);
     var realEmail = req.query.realEmail;
     var alias = req.query.alias;
@@ -67,7 +67,7 @@ router.get('/add/', middlewares.checkParamsMiddleware, (req, res) => {
 });
 
 // Delete alias route
-router.get('/delete/', middlewares.checkParamsMiddleware, (req, res) => {
+router.get('/delete/', [middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
     console.log('Delete request received from: ' + req.ip);
     var realEmail = req.query.realEmail;
     var alias = req.query.alias;

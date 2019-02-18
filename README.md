@@ -72,7 +72,7 @@ When using a route that requires parameters, the following parameters must be in
 
 | Parameter Name (as it must be sent to the API): | Parameter Information: | Example Parameter Value: |
 |:----------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
-| `alias `| This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ **Please do not include the `@` sign within the alias.**  | myalias |
+| `alias `| This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ | myalias |
 | `realEmail` | This is the real email address in which the emails destined to the aliases will be forwarded to. | example@gmail.com |
 
 The table below contains the response values (JSON keys) associated with each successful API call:
@@ -103,7 +103,6 @@ Pull requests are welcome and will be reviewed and merged in a case-by-case basi
 If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
- - Add server-side input validation/sanitation.
  - Add logging, via a middleware.
  - Add an API key system, via a middleware.
  - Limit the IPs that can make use of the service, via a middleware.
@@ -114,6 +113,7 @@ You'll find information about each release below.
 #### Version 1.0
 * Built `/`, `/add/`, and `/delete/` routes.
 * Added parameter checking middleware.
+* Added parameter validation middleware.
 * Added internal versioning.
 * Added Mocha/Chai unit tests.
 * Added Travis CI support.

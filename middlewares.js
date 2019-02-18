@@ -17,4 +17,27 @@ function checkParamsMiddleware(req, res, next) {
     }
 }
 
+function validateParamsMiddleware(req, res, next) {
+    var alias = req.query['alias'];
+    var email = req.query['realEmail'];
+    var emailVerificationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    if(alias.includes('@')){
+        res.status(422).send({
+            success: 'FALSE',
+            message: 'Error: The supplied alias parameter is invalid. Please be sure that it does not contain an \'@\' symbol.'
+        });
+    }else{
+        if(!emailVerificationRegex.test(email)){
+            res.status(422).send({
+                success: 'FALSE',
+                message: 'Error: The supplied realEmail parameter is invalid.'
+            });
+        }else{
+            next();
+        }
+    }
+}
+
 module.exports.checkParamsMiddleware = checkParamsMiddleware;
+module.exports.validateParamsMiddleware = validateParamsMiddleware;
