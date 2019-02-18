@@ -29,28 +29,23 @@ npm install
 ```
 _Note: When prompted, you may need to provide administrator credentials to complete the installation._
 
-6.  Run the dependency checker via the command:
+6.  You will need to set an environment variable for your ForwardMX API Key. On a Mac, this is done via:
 ```sh
-node index.js
-```
-
-7.  You will get an error message with a list of required environment variables. For each of these elements, create an environment variable within your system. On a Mac, this is done via:
-```sh
-export <variableName>=<variableValue>
+export localForwardMxApiKey=<value>
 ```
 _Note: If you make a mistake, you can reverse this action by running:_
 ```sh
-unset <variableName>
+unset <localForwardMxApiKey>
 ```
-Once complete, verify that the environment variables have been set correctly by viewing your environment variables. Again, using a Mac as an example:
+Once complete, verify that the API key has been set correctly by viewing your environment variables. Again, using a Mac as an example:
 ```sh
 env
 ```
-8. Start the server via:
+7. If correct, you may then start the server via:
 ```sh
 node index.js
 ```
-9. _(Optional)_ Once the server is running, you can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
+8. _(Optional)_ Once the server is running, you can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
 
 ## Tests
 Mocha/Chai unit tests have been provided within the [`/test/`][/test/] directory. The test files mirror the application files, i.e [`/test/test.middlewares.js`][/test/test.middlewares.js] tests the functionality of the [`middlewares.js`][middlewares.js] file. Run all the tests via:
