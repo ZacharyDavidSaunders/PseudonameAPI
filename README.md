@@ -29,7 +29,7 @@ npm install
 ```
 _Note: When prompted, you may need to provide administrator credentials to complete the installation._
 
-6.  You will need to set an environment variable for your ForwardMX API Key. On a Mac, this is done via:
+6.  You will need to set an environment variable for your ForwardMX API Key. On a Mac, this is done via the following command (omit the `<>` symbols):
 ```sh
 export localForwardMxApiKey=<value>
 ```
@@ -54,25 +54,33 @@ Mocha/Chai unit tests have been provided within the [`/test/`][/test/] directory
 npm test
 ```
 
-## Continuous Integration
+## Continuous Integration ([![Build Status](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI.svg?token=hxEQFjRhm1AWTqMMrsDR&branch=master)](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI)) / Deployment
 
-Travis CI is used for continuous integration, the project page can be viewed [here.][Travis CI Project Page] Each merge into master and each Pull Request is automatically tested. The following badge (which is also located at the top of this README document) displays the current build status: [![Build Status](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI.svg?token=hxEQFjRhm1AWTqMMrsDR&branch=master)](https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI)
+Travis CI is used for continuous integration, the project page can be viewed [here.][Travis CI Project Page] The badge listed above^ (which is also located at the top of this README document) displays the current build status. Each merge into master and each Pull Request is automatically tested and upon passing, is automatically deployed to heroku.
 
-![Travis CI][Travis CI Logo]
+![Travis CI][Travis CI Logo] ![arrow][arrow image] ![Heroku][Heroku Logo]
 
 ## Supported Routes
 
-| Route: | HTTP Method: | Usage: | Requires Parameters? |
+| Route: | HTTP Method: | Usage: | Requires Parameters?: |
 |:----------:|:------------:|:-------------------------------------:|:--------------------:|
+| `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No |
 | `/add/` | GET | This route is used to create aliases. | Yes |
 | `/delete/` | GET | This route is used to delete aliases. | Yes |
 
-When using a route that requires parameters, the follow parameters must be included in the request. If these parameters are not provided, the request will be refused:
+When using a route that requires parameters, the following parameters must be included in the request. If these parameters are not provided, the request will be refused:
 
-| Parameter Name (as it must be sent to the API) | Parameter Information | Example Parameter Value |
+| Parameter Name (as it must be sent to the API): | Parameter Information: | Example Parameter Value: |
 |:----------------------------------------------:|-------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------|
-| alias | This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ **Please do not include the `@` sign within the alias.**  | myalias |
-| realEmail | This is the real email address in which the emails destined to the aliases will be forwarded to. | example@gmail.com |
+| `alias `| This is the desired email alias. _The alias is the first few characters of an email, as in <alias>@<domain.com>._ **Please do not include the `@` sign within the alias.**  | myalias |
+| `realEmail` | This is the real email address in which the emails destined to the aliases will be forwarded to. | example@gmail.com |
+
+The table below contains the response values (JSON keys) associated with each successful API call:
+
+| API Response Value Name: | Possible Values: | Usage: |
+|:----------:|------------|-------------------------------------|
+| `success` | `TRUE` or `FALSE` | This response value indicates whether the requested operation was performed successfully. |
+| `message` | Really anything. Each API call has a specific list of possible messages. | This response value provides other information that cannot be expressed in boolean logic. |
 
 ## Dependencies
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
@@ -95,7 +103,6 @@ Pull requests are welcome and will be reviewed and merged in a case-by-case basi
 If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
- - Add a version checking route/response. This can be used as a quick method to verify API connectivity too. —  _(Coming Soon!)_
  - Add server-side input validation/sanitation.
  - Add logging, via a middleware.
  - Add an API key system, via a middleware.
@@ -105,13 +112,12 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 ## Release Notes
 You'll find information about each release below.
 #### Version 1.0
-* Built basic `/add/` and `/delete/` routes.
+* Built `/`, `/add/`, and `/delete/` routes.
 * Added parameter checking middleware.
-* Added dependency checker.
 * Added internal versioning.
 * Added Mocha/Chai unit tests.
-* Added API documentation in the README.
 * Added Travis CI support.
+* Added API documentation in the README.
 
 ## License
 
@@ -136,3 +142,5 @@ You'll find information about each release below.
    [Travis CI Project Page]:https://travis-ci.com/ZacharyDavidSaunders/PseudonameAPI
    [Travis CI Logo]:https://felixrieseberg.gallerycdn.vsassets.io/extensions/felixrieseberg/vsc-travis-ci-status/1.1.0/1489588030200/Microsoft.VisualStudio.Services.Icons.Default
    [Logo Mashup]:https://developerhowto.com/wp-content/uploads/2018/12/node-express-mocha-chai.png
+   [arrow image]:https://i1.wp.com/www.madisonracquet.com/wp-content/uploads/2011/12/1324494789_Arrow-Right.png?resize=128%2C128
+   [Heroku Logo]:https://cdn.iconscout.com/icon/free/png-128/heroku-11-1175214.png

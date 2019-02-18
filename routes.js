@@ -17,6 +17,14 @@ var router = express.Router();
 
 //<-----------END OF DEFINITIONS----------->
 
+// Empty route
+router.get('/', (req, res) => {
+  res.status(200).send({
+      success: 'TRUE',
+      message: 'You have reached '+index.NAME+'v'+index.VERSION+'. Please see the API Documentation for more information: '+index.DOCUMENTATION
+  });
+});
+
 // Add alias route
 router.get('/add/', middlewares.checkParamsMiddleware, (req, res) => {
     console.log('Add request received from: ' + req.ip);

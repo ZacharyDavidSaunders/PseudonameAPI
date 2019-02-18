@@ -16,6 +16,7 @@ var VERSION = '1.0';
 var DOMAIN = "pseudoname.io";
 var NAME = "PseudonameAPI";
 var PORT = process.env.PORT || 5000;
+var DOCUMENTATION = 'https://github.com/ZacharyDavidSaunders/PseudonameAPI#what-is-pseudonameapi';
 var forwardMxApiKey = process.env.herokuForwardMXApiKey || process.env.localForwardMxApiKey;
 
 //<-----------END OF DEFINITIONS----------->
@@ -31,6 +32,9 @@ app.listen(PORT, () => {
 });
 
 module.exports.app = app; //For unit-testing
+module.exports.VERSION = VERSION;
 module.exports.DOMAIN = DOMAIN;
 module.exports.PORT = PORT;
+module.exports.NAME = NAME;
+module.exports.DOCUMENTATION = DOCUMENTATION;
 module.exports.forwardMxApiKey = forwardMxApiKey;

@@ -9,10 +9,10 @@ chai.use(chaiHttp);
 
 describe('Route Tests:', function() {
     describe('Unsupported Routes Tests:', function(){
-        describe('\'/\' test' ,function() {
+        describe('\'/unusedRoute/\' test' ,function() {
             it('should respond with a 404', (done) => {
                 chai.request('localhost:'+index.PORT)
-                    .get('/')
+                    .get('/unusedRoute/')
                     .send()
                     .end((err, res) => {
                         expect(res.status).to.equal(404);
@@ -42,7 +42,21 @@ describe('Route Tests:', function() {
                     });
             });
         });
-        
+    });
+    describe('\'/\' test' ,function() {
+        it('Should confirm connection, display the API name, version, and documentation URL.', (done) => {
+            chai.request('localhost:'+index.PORT)
+                .get('/')
+                .send()
+                .end((err, res) => {
+                  expect(res.status).to.deep.equal(200);
+                  expect(res.body).to.have.property('success');
+                  expect(res.body.success).to.deep.equal('TRUE');
+                  expect(res.body).to.have.property('message');
+                  expect(res.body.message).to.deep.equal('You have reached '+index.NAME+'v'+index.VERSION+'. Please see the API Documentation for more information: '+index.DOCUMENTATION);
+                  done();
+                });
+        });
     });
     describe('\'/add/\' Tests:', function () {
         describe('Trying to add an alias correctly' ,function(){
@@ -72,9 +86,7 @@ describe('Route Tests:', function() {
                     });
             });
         });
-        
     });
-
     describe('\'/delete/\' Tests:', function () {
         describe('Trying to delete an alias correctly' ,function(){
             it('should either be deleted or say that the alias does not yet exist',(done) => {
@@ -103,7 +115,6 @@ describe('Route Tests:', function() {
                     });
             });
         });
-
         describe('Trying to delete an alias not that the provided email does not own' ,function(){
             it('should be refused with an explanation as to why',(done) => {
                 chai.request('localhost:'+index.PORT)
@@ -117,6 +128,5 @@ describe('Route Tests:', function() {
                     });
             });
         });
-
     });
 });
