@@ -39,5 +39,14 @@ function validateParamsMiddleware(req, res, next) {
     }
 }
 
+//CORS middleware
+function corsMiddleware(req, res, next) {
+    res.header('Access-Control-Allow-Origin', 'https://pseudoname.io');
+    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+}
+
+module.exports.corsMiddleware = corsMiddleware;
 module.exports.checkParamsMiddleware = checkParamsMiddleware;
 module.exports.validateParamsMiddleware = validateParamsMiddleware;

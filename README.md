@@ -104,12 +104,14 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
  - Add logging, via a middleware.
- - Add an API key system, via a middleware.
- - Limit the IPs that can make use of the service, via a middleware.
  - Explore the possibility of encryption. —  _(This may require collaboration with ForwardMX)_
 
 ## Release Notes
 You'll find information about each release below.
+
+#### Version 1.1
+* Added a CORS IP filtering middleware.
+
 #### Version 1.0
 * Built `/`, `/add/`, and `/delete/` routes.
 * Added parameter checking middleware.

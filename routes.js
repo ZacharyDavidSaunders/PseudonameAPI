@@ -18,7 +18,7 @@ var router = express.Router();
 //<-----------END OF DEFINITIONS----------->
 
 // Empty route
-router.get('/', (req, res) => {
+router.get('/', middlewares.corsMiddleware, (req, res) => {
   res.status(200).send({
       success: 'TRUE',
       message: 'You have reached '+index.NAME+'v'+index.VERSION+'. Please see the API Documentation for more information: '+index.DOCUMENTATION
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 });
 
 // Add alias route
-router.get('/add/', [middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
+router.get('/add/', [middlewares.corsMiddleware, middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
     console.log('Add request received from: ' + req.ip);
     var realEmail = req.query.realEmail;
     var alias = req.query.alias;
@@ -67,7 +67,7 @@ router.get('/add/', [middlewares.checkParamsMiddleware, middlewares.validatePara
 });
 
 // Delete alias route
-router.get('/delete/', [middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
+router.get('/delete/', [middlewares.corsMiddleware, middlewares.checkParamsMiddleware, middlewares.validateParamsMiddleware], (req, res) => {
     console.log('Delete request received from: ' + req.ip);
     var realEmail = req.query.realEmail;
     var alias = req.query.alias;
