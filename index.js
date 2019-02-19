@@ -12,7 +12,7 @@ var express = require('express');
  * Global Vars:
  */
 // The API's version
-var VERSION = '1.1';
+var VERSION = '1.2';
 var DOMAIN = "pseudoname.io";
 var NAME = "PseudonameAPI";
 var PORT = process.env.PORT || 5000;

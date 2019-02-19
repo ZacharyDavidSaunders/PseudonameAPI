@@ -12,7 +12,7 @@ To a larger extent, the PseudonameAPI can be viewed as a node.js wrapper for the
 
 ## What is "Pseudoname"?
 
-[Pseudoname.io][Pseudoname site] is a free, non-disposable email alias generating service. Pseudoname is also open source and more information about it can be found [here](https://github.com/ZacharyDavidSaunders/pseudoname).
+[Pseudoname.io][Pseudoname site] is a free, disposable email alias generating service. Pseudoname is also open source and more information about it can be found [here](https://github.com/ZacharyDavidSaunders/pseudoname).
 
 ## Installation
 PseudonameAPI is very easy to install and launch.
@@ -108,6 +108,10 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## Release Notes
 You'll find information about each release below.
+
+#### Version 1.2
+* Tweaked routes to have more uniform responses.
+* Purged old API key.
 
 #### Version 1.1
 * Added a CORS IP filtering middleware.
