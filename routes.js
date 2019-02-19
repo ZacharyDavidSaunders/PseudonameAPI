@@ -39,7 +39,7 @@ router.get('/add/', [middlewares.corsMiddleware, middlewares.checkParamsMiddlewa
             if (this.responseText.includes('Alias created')) {
                 res.status(200).send({
                     success: 'TRUE',
-                    message: 'Alias has been created.'
+                    message: 'Alias has been created. Please wait 60 seconds before sending emails to the alias. Doing so ensures that the all systems have been updated and emails are not lost.'
                 });
                 // This text snippet indicates the the dependency API has already has a record associated with the provided alias.
             } else if (this.responseText.includes('You can only define the same source once per domain')) {
@@ -88,7 +88,7 @@ router.get('/delete/', [middlewares.corsMiddleware, middlewares.checkParamsMiddl
                 if (savedAliases.includes(alias) === false) {
                     res.status(200).send({
                         success: 'FALSE',
-                        message: 'Alias has not yet been registered and thus may not be deleted.'
+                        message: 'Error: Alias has not yet been registered and thus may not be deleted.'
                     });
                     console.log('A deletion was attempted on the alias ' + alias + ', however, the alias does not exist.');
                     // If the alias does exist

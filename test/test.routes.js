@@ -76,7 +76,7 @@ describe('Route Tests:', function() {
                         });
                         expect(res.body).to.have.property('message');
                         expect(res.body.message).to.satisfy(function (message) {
-                            if ((message === 'Alias has been created.') || (message === 'Error: Duplicate alias request refused.')) {
+                            if ((message === 'Alias has been created. Please wait 60 seconds before sending emails to the alias. Doing so ensures that the all systems have been updated and emails are not lost.') || (message === 'Error: Duplicate alias request refused.')) {
                                 return true;
                             } else {
                                 return false;
@@ -105,7 +105,7 @@ describe('Route Tests:', function() {
                         });
                         expect(res.body).to.have.property('message');
                         expect(res.body.message).to.satisfy(function (message) {
-                            if ((message === 'Alias has been deleted.') || (message === 'Alias has not yet been registered and thus may not be deleted.')) {
+                            if ((message === 'Alias has been deleted.') || (message === 'Error: Alias has not yet been registered and thus may not be deleted.')) {
                                 return true;
                             } else {
                                 return false;
