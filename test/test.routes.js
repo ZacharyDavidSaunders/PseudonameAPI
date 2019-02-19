@@ -105,7 +105,7 @@ describe('Route Tests:', function() {
                         });
                         expect(res.body).to.have.property('message');
                         expect(res.body.message).to.satisfy(function (message) {
-                            if ((message === 'Alias has been deleted.') || (message === `Error: Alias has not yet been registered and thus may not be deleted.`)) {
+                            if ((message === 'Alias has been deleted.') || (message === 'Error: Alias has not yet been registered and thus may not be deleted.')) {
                                 return true;
                             } else {
                                 return false;
