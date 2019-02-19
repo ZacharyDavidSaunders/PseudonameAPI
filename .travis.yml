@@ -1,6 +1,11 @@
 language: node_js
 node_js:
-- 8
+  - 8
+before_script:
+  - npm install
+script:
+  - node index.js &
+  - npm test
 deploy:
   provider: heroku
   app: pseudoname-api
