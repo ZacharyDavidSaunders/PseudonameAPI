@@ -103,11 +103,13 @@ Pull requests are welcome and will be reviewed and merged in a case-by-case basi
 If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 
 ## To-Do's
- - Add logging, via a middleware.
  - Explore the possibility of encryption. —  _(This may require collaboration with ForwardMX)_
 
 ## Release Notes
 You'll find information about each release below.
+
+#### Version 1.3
+* Added a simple logging middleware for diagnostic purposes.
 
 #### Version 1.2
 * Tweaked routes to have more uniform responses.

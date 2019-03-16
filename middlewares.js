@@ -39,7 +39,6 @@ function validateParamsMiddleware(req, res, next) {
     }
 }
 
-//CORS middleware
 function corsMiddleware(req, res, next) {
     res.header('Access-Control-Allow-Origin', 'https://pseudoname.io');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
@@ -47,6 +46,12 @@ function corsMiddleware(req, res, next) {
     next();
 }
 
+function loggingMiddleware(req, res, next){
+    console.log(req.path+' request received from req.ip: ' + req.ip+ ', req.connection.remoteAddress: '+req.connection.remoteAddress+', req.secure: '+req.secure);
+    next();
+}
+
 module.exports.corsMiddleware = corsMiddleware;
 module.exports.checkParamsMiddleware = checkParamsMiddleware;
+module.exports.loggingMiddleware = loggingMiddleware;
 module.exports.validateParamsMiddleware = validateParamsMiddleware;
