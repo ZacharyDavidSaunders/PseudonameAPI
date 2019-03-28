@@ -1,7 +1,7 @@
 /*
  * Dependency modules:
  */
-var express = require('express');
+var express = require("express");
 
 /*
  * Dependency files:
@@ -12,23 +12,25 @@ var express = require('express');
  * Global Vars:
  */
 // The API's version
-var VERSION = '1.2';
+var VERSION = "1.2";
 var DOMAIN = "pseudoname.io";
 var NAME = "PseudonameAPI";
 var PORT = process.env.PORT || 5000;
-var DOCUMENTATION = 'https://github.com/ZacharyDavidSaunders/PseudonameAPI#what-is-pseudonameapi';
-var forwardMxApiKey = process.env.herokuForwardMXApiKey || process.env.localForwardMxApiKey;
+var DOCUMENTATION =
+  "https://github.com/ZacharyDavidSaunders/PseudonameAPI#what-is-pseudonameapi";
+var forwardMxApiKey =
+  process.env.herokuForwardMXApiKey || process.env.localForwardMxApiKey;
 
 //<-----------END OF DEFINITIONS----------->
 
 // Set up the express app
 const app = express();
-app.use(require('./routes.js'));
+app.use(require("./routes.js"));
 
 app.listen(PORT, () => {
-    // Confirms successful server start.
-    console.log('\x1b[7m',NAME+'(v'+VERSION+') has started.','\x1b[0m');
-    console.log(NAME+' is now accepting requests on port: '+ PORT);
+  // Confirms successful server start.
+  console.log("\x1b[7m", NAME + "(v" + VERSION + ") has started.", "\x1b[0m");
+  console.log(NAME + " is now accepting requests on port: " + PORT);
 });
 
 module.exports.app = app; //For unit-testing
