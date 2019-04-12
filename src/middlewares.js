@@ -1,7 +1,7 @@
 function checkParamsMiddleware(req, res, next) {
-  var requiredParams = ["alias", "realEmail"];
-  var hasRequiredParams = true;
-  for (var i in requiredParams) {
+  const requiredParams = ["alias", "realEmail"];
+  let hasRequiredParams = true;
+  for (const i in requiredParams) {
     // Checks that the API request supplies the required params.
     if (!req.query[requiredParams[i]]) {
       hasRequiredParams = false;
@@ -12,21 +12,18 @@ function checkParamsMiddleware(req, res, next) {
   } else {
     res.status(422).send({
       success: "FALSE",
-      message:
-        "Error: Missing required param. Please ensure that the following params are provided in the query: " +
-        requiredParams
-          .toString()
-          .split(",")
-          .join(", ") +
-        "."
+      message: `Error: Missing required param. Please ensure that the following params are provided in the query: ${requiredParams
+        .toString()
+        .split(",")
+        .join(", ")}.`
     });
   }
 }
 
 function validateParamsMiddleware(req, res, next) {
-  var alias = req.query["alias"];
-  var email = req.query["realEmail"];
-  var emailVerificationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  const { alias } = req.query;
+  const email = req.query.realEmail;
+  const emailVerificationRegex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   if (alias.includes("@")) {
     res.status(422).send({
@@ -34,15 +31,13 @@ function validateParamsMiddleware(req, res, next) {
       message:
         "Error: The supplied alias parameter is invalid. Please be sure that it does not contain an '@' symbol."
     });
+  } else if (!emailVerificationRegex.test(email)) {
+    res.status(422).send({
+      success: "FALSE",
+      message: "Error: The supplied realEmail parameter is invalid."
+    });
   } else {
-    if (!emailVerificationRegex.test(email)) {
-      res.status(422).send({
-        success: "FALSE",
-        message: "Error: The supplied realEmail parameter is invalid."
-      });
-    } else {
-      next();
-    }
+    next();
   }
 }
 
@@ -55,13 +50,11 @@ function corsMiddleware(req, res, next) {
 
 function loggingMiddleware(req, res, next) {
   console.log(
-    req.path +
-      " request received from req.ip: " +
-      req.ip +
-      ", req.connection.remoteAddress: " +
-      req.connection.remoteAddress +
-      ", req.secure: " +
-      req.secure
+    `${req.path} request received from req.ip: ${
+      req.ip
+    }, req.connection.remoteAddress: ${
+      req.connection.remoteAddress
+    }, req.secure: ${req.secure}`
   );
   next();
 }

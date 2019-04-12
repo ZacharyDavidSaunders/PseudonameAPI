@@ -1,21 +1,21 @@
 /*
  * Dependency modules:
  */
-var express = require("express");
-var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
+const express = require("express");
+const { XMLHttpRequest } = require("xmlhttprequest");
 
 /*
  * Dependency files:
  */
-var middlewares = require("./middlewares");
-var index = require("./index");
+const middlewares = require("./middlewares");
+const index = require("./index");
 
 /*
  * Global Vars:
  */
-var router = express.Router();
+const router = express.Router();
 
-//<-----------END OF DEFINITIONS----------->
+// <-----------END OF DEFINITIONS----------->
 
 // Empty route
 router.get(
@@ -24,13 +24,11 @@ router.get(
   (req, res) => {
     res.status(200).send({
       success: "TRUE",
-      message:
-        "You have reached " +
-        index.NAME +
-        "v" +
-        index.VERSION +
-        ". Please see the API Documentation for more information: " +
+      message: `You have reached ${index.NAME}v${
+        index.VERSION
+      }. Please see the API Documentation for more information: ${
         index.DOCUMENTATION
+      }`
     });
   }
 );
@@ -45,9 +43,9 @@ router.get(
     middlewares.validateParamsMiddleware
   ],
   (req, res) => {
-    var realEmail = req.query.realEmail;
-    var alias = req.query.alias;
-    var xhttp = new XMLHttpRequest();
+    const { realEmail } = req.query;
+    const { alias } = req.query;
+    const xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
       // When the dependency API has fully responded.
@@ -80,27 +78,16 @@ router.get(
     };
     xhttp.open(
       "POST",
-      "https://forwardmx.io/api/alias/create?" +
-        "&key=" +
-        index.forwardMxApiKey +
-        "&domain=" +
-        index.DOMAIN +
-        "&destination=" +
-        realEmail +
-        "&alias=" +
-        alias,
+      `${"https://forwardmx.io/api/alias/create?" + "&key="}${
+        index.forwardMxApiKey
+      }&domain=${index.DOMAIN}&destination=${realEmail}&alias=${alias}`,
       true
     );
     xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
     console.log(
-      "The following external API was called: https://forwardmx.io/api/alias/create?&key=" +
-        index.forwardMxApiKey +
-        "&domain=" +
-        index.DOMAIN +
-        "&destination=" +
-        realEmail +
-        "&alias=" +
-        alias
+      `The following external API was called: https://forwardmx.io/api/alias/create?&key=${
+        index.forwardMxApiKey
+      }&domain=${index.DOMAIN}&destination=${realEmail}&alias=${alias}`
     );
     xhttp.send();
   }
@@ -116,18 +103,18 @@ router.get(
     middlewares.validateParamsMiddleware
   ],
   (req, res) => {
-    var realEmail = req.query.realEmail;
-    var alias = req.query.alias;
-    var xhttp = new XMLHttpRequest();
+    const { realEmail } = req.query;
+    const { alias } = req.query;
+    const xhttp = new XMLHttpRequest();
 
     xhttp.onreadystatechange = function() {
       if (this.readyState === 4 && this.status === 200) {
         // Only a successful API response will be formatted in JSON, and therefore will have a '['.
         if (this.responseText.includes("[")) {
-          var savedResponses = JSON.parse(this.responseText);
-          var savedAliases = [];
-          var savedEmails = [];
-          for (var i in savedResponses) {
+          const savedResponses = JSON.parse(this.responseText);
+          const savedAliases = [];
+          const savedEmails = [];
+          for (const i in savedResponses) {
             savedAliases.push(savedResponses[i].source.slice(0, -1));
             savedEmails.push(savedResponses[i].destination);
           }
@@ -139,20 +126,18 @@ router.get(
                 "Error: Alias has not yet been registered and thus may not be deleted."
             });
             console.log(
-              "A deletion was attempted on the alias " +
-                alias +
-                ", however, the alias does not exist."
+              `A deletion was attempted on the alias ${alias}, however, the alias does not exist.`
             );
             // If the alias does exist
           } else {
             // Get the index where the alias is saved,
-            var matchingIndex = savedAliases.indexOf(alias);
+            const matchingIndex = savedAliases.indexOf(alias);
             // Check if the saved alias matches the saved Email
             if (
               matchingIndex !== -1 &&
               savedEmails[matchingIndex] === realEmail
             ) {
-              var xhttp = new XMLHttpRequest();
+              const xhttp = new XMLHttpRequest();
               xhttp.onreadystatechange = function() {
                 if (this.readyState === 4 && this.status === 200) {
                   // This text snippet indicates the the dependency API has successfully deleted the alias.
@@ -166,23 +151,16 @@ router.get(
               };
               xhttp.open(
                 "POST",
-                "https://forwardmx.io/api/alias/destroy?" +
-                  "&key=" +
-                  index.forwardMxApiKey +
-                  "&alias=" +
-                  alias +
-                  "&domain=" +
-                  index.DOMAIN,
+                `${"https://forwardmx.io/api/alias/destroy?" + "&key="}${
+                  index.forwardMxApiKey
+                }&alias=${alias}&domain=${index.DOMAIN}`,
                 true
               );
               xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
               console.log(
-                "The following external API was called: https://forwardmx.io/api/alias/destroy?&key=" +
-                  index.forwardMxApiKey +
-                  "&alias=" +
-                  alias +
-                  "&domain=" +
-                  index.DOMAIN
+                `The following external API was called: https://forwardmx.io/api/alias/destroy?&key=${
+                  index.forwardMxApiKey
+                }&alias=${alias}&domain=${index.DOMAIN}`
               );
               xhttp.send();
               // Occurs when the provided alias does not belong to the provided alias.
@@ -193,13 +171,9 @@ router.get(
                   "Error: Deletion denied. The provided alias is not owned by the provided email."
               });
               console.log(
-                "The alias " +
-                  alias +
-                  ", which is owned by " +
-                  savedEmails[matchingIndex] +
-                  " was denied deletion by " +
-                  realEmail +
-                  "."
+                `The alias ${alias}, which is owned by ${
+                  savedEmails[matchingIndex]
+                } was denied deletion by ${realEmail}.`
               );
             }
           }
@@ -208,19 +182,16 @@ router.get(
     };
     xhttp.open(
       "POST",
-      "https://forwardmx.io/api/aliases?" +
-        "&key=" +
-        index.forwardMxApiKey +
-        "&domain=" +
-        index.DOMAIN,
+      `${"https://forwardmx.io/api/aliases?" + "&key="}${
+        index.forwardMxApiKey
+      }&domain=${index.DOMAIN}`,
       true
     );
     xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
     console.log(
-      "The following external API was called: https://forwardmx.io/api/aliases?&key=" +
-        index.forwardMxApiKey +
-        "&domain=" +
-        index.DOMAIN
+      `The following external API was called: https://forwardmx.io/api/aliases?&key=${
+        index.forwardMxApiKey
+      }&domain=${index.DOMAIN}`
     );
     xhttp.send();
   }
