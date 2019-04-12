@@ -24,10 +24,10 @@ router.get(
   (req, res) => {
     res.status(200).send({
       success: "TRUE",
-      message: `You have reached ${index.NAME}v${
-        index.VERSION
+      message: `You have reached ${process.env.NAME}v${
+        process.env.VERSION
       }. Please see the API Documentation for more information: ${
-        index.DOCUMENTATION
+        process.env.DOCUMENTATION
       }`
     });
   }
@@ -79,15 +79,15 @@ router.get(
     xhttp.open(
       "POST",
       `${"https://forwardmx.io/api/alias/create?" + "&key="}${
-        index.forwardMxApiKey
-      }&domain=${index.DOMAIN}&destination=${realEmail}&alias=${alias}`,
+        process.env.forwardMxApiKey
+      }&domain=${process.env.DOMAIN}&destination=${realEmail}&alias=${alias}`,
       true
     );
-    xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
+    xhttp.setRequestHeader("x-requested-with", process.env.DOMAIN);
     console.log(
       `The following external API was called: https://forwardmx.io/api/alias/create?&key=${
-        index.forwardMxApiKey
-      }&domain=${index.DOMAIN}&destination=${realEmail}&alias=${alias}`
+        process.env.forwardMxApiKey
+      }&domain=${process.env.DOMAIN}&destination=${realEmail}&alias=${alias}`
     );
     xhttp.send();
   }
@@ -152,15 +152,15 @@ router.get(
               xhttp.open(
                 "POST",
                 `${"https://forwardmx.io/api/alias/destroy?" + "&key="}${
-                  index.forwardMxApiKey
-                }&alias=${alias}&domain=${index.DOMAIN}`,
+                  process.env.forwardMxApiKey
+                }&alias=${alias}&domain=${process.env.DOMAIN}`,
                 true
               );
-              xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
+              xhttp.setRequestHeader("x-requested-with", process.env.DOMAIN);
               console.log(
                 `The following external API was called: https://forwardmx.io/api/alias/destroy?&key=${
-                  index.forwardMxApiKey
-                }&alias=${alias}&domain=${index.DOMAIN}`
+                  process.env.forwardMxApiKey
+                }&alias=${alias}&domain=${process.env.DOMAIN}`
               );
               xhttp.send();
               // Occurs when the provided alias does not belong to the provided alias.
@@ -183,15 +183,15 @@ router.get(
     xhttp.open(
       "POST",
       `${"https://forwardmx.io/api/aliases?" + "&key="}${
-        index.forwardMxApiKey
-      }&domain=${index.DOMAIN}`,
+        process.env.forwardMxApiKey
+      }&domain=${process.env.DOMAIN}`,
       true
     );
-    xhttp.setRequestHeader("x-requested-with", index.DOMAIN);
+    xhttp.setRequestHeader("x-requested-with", process.env.DOMAIN);
     console.log(
       `The following external API was called: https://forwardmx.io/api/aliases?&key=${
-        index.forwardMxApiKey
-      }&domain=${index.DOMAIN}`
+        process.env.forwardMxApiKey
+      }&domain=${process.env.DOMAIN}`
     );
     xhttp.send();
   }
