@@ -108,6 +108,14 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 ## Release Notes
 You'll find information about each release below.
 
+#### Version 1.4
+* Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
+* Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
+* Made the CORS middleware reference the domain variable, not a hardcoded string.
+* Retricted the methods allowed in the CORS middleware.
+* Added HTTP method logging to the logging middleware.
+* Removed the `remoteAddress` logging from the logging middleware (this was a duplicate of `req.ip` most of the time). 
+
 #### Version 1.3
 * Added a simple logging middleware for diagnostic purposes.
 
