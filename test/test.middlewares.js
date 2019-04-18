@@ -5,7 +5,7 @@
 const chai = require('chai');
 const mocha = require('mocha');
 const chaiHttp = require('chai-http');
-const index = require('../index');
+const index = require('../src/index');
 
 const expect = chai.expect;
 const describe = mocha.describe;
