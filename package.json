@@ -2,10 +2,10 @@
   "name": "pseudonameapi",
   "version": "1.0.0",
   "description": "The API that the pseudoname.io site relies upon.",
-  "main": "index.js",
+  "main": "./src/index.js",
   "scripts": {
     "test": "npm install && mocha --recursive --exit",
-    "start": "index.js"
+    "start": "./src/index.js"
   },
   "repository": {
     "type": "git",
