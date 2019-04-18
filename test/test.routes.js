@@ -79,7 +79,7 @@ describe('Route Tests:', function () {
       it('should either be added or say that the alias is already taken', (done) => {
         chai
           .request(`localhost:${index.PORT}`)
-          .get('/add/?alias=newAlias&realEmail=test@gmail.com')
+          .post('/add/?alias=newAlias&realEmail=test@gmail.com')
           .send()
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
@@ -111,7 +111,7 @@ describe('Route Tests:', function () {
       it('should either be deleted or say that the alias does not yet exist', (done) => {
         chai
           .request(`localhost:${index.PORT}`)
-          .get('/delete/?alias=newAlias&realEmail=test@gmail.com')
+          .delete('/delete/?alias=newAlias&realEmail=test@gmail.com')
           .send()
           .end((err, res) => {
             expect(res.status).to.deep.equal(200);
@@ -141,7 +141,7 @@ describe('Route Tests:', function () {
       it('should be refused with an explanation as to why', (done) => {
         chai
           .request(`localhost:${index.PORT}`)
-          .get('/delete/?alias=contactus&realEmail=test@gmail.com')
+          .delete('/delete/?alias=contactus&realEmail=test@gmail.com')
           .send()
           .end((err, res) => {
             expect(res.status).to.equal(200);

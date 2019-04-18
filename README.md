@@ -43,7 +43,7 @@ env
 ```
 7. If correct, you may then start the server via:
 ```sh
-node index.js
+node src/index.js
 ```
 8. _(Optional)_ Once the server is running, you can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
 
@@ -65,8 +65,8 @@ Travis CI is used for continuous integration, the project page can be viewed [he
 | Route: | HTTP Method: | Usage: | Requires Parameters?: |
 |:----------:|:------------:|:-------------------------------------:|:--------------------:|
 | `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No |
-| `/add/` | GET | This route is used to create aliases. | Yes |
-| `/delete/` | GET | This route is used to delete aliases. | Yes |
+| `/add/` | POST | This route is used to create aliases. | Yes |
+| `/delete/` | DELETE | This route is used to delete aliases. | Yes |
 
 When using a route that requires parameters, the following parameters must be included in the request. If these parameters are not provided, the request will be refused:
 
@@ -109,7 +109,8 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 You'll find information about each release below.
 
 #### Version 1.4
-* Added the CONTRIBUTING.md file.
+* Updated the API's HTTP methods (`/delete/` is now a DELETE, `/add/` is now a POST).
+* Added the [CONTRIBUTING.md] file.
 * Prevented the daisy-chaining of aliases.
 * Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
 * Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
@@ -162,3 +163,4 @@ You'll find information about each release below.
    [Logo Mashup]:https://developerhowto.com/wp-content/uploads/2018/12/node-express-mocha-chai.png
    [arrow image]:https://i1.wp.com/www.madisonracquet.com/wp-content/uploads/2011/12/1324494789_Arrow-Right.png?resize=128%2C128
    [Heroku Logo]:https://cdn.iconscout.com/icon/free/png-128/heroku-11-1175214.png
+   [CONTRIBUTING.md]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/CONTRIBUTING.md
