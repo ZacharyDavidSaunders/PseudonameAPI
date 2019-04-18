@@ -17,7 +17,7 @@ router.get('/', [
 });
 
 // Add alias route
-router.get('/add/', [
+router.post('/add/', [
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
@@ -57,7 +57,7 @@ router.get('/add/', [
 });
 
 // Delete alias route
-router.get('/delete/', [
+router.delete('/delete/', [
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,

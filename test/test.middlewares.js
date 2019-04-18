@@ -18,7 +18,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to add an alias without either param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/add/')
+            .post('/add/')
             .send()
             .end((err, res) => {
               expect(res.status).to.equal(422);
@@ -32,7 +32,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to add an alias with an alias param, without a realEmail param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/add/?alias=uniqueAlias')
+            .post('/add/?alias=uniqueAlias')
             .send()
             .end((err, res) => {
               expect(res.status).to.equal(422);
@@ -46,7 +46,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to add an alias with a realEmail param, without an alias param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/add/?realEmail=realEmail@gmail.com')
+            .post('/add/?realEmail=realEmail@gmail.com')
             .send()
             .end((err, res) => {
               expect(res.status).to.deep.equal(422);
@@ -61,7 +61,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to delete an alias without either param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/delete/')
+            .delete('/delete/')
             .send()
             .end((err, res) => {
               expect(res.status).to.equal(422);
@@ -75,7 +75,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to delete an alias with an alias param, without a realEmail param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/delete/?alias=uniqueAlias')
+            .delete('/delete/?alias=uniqueAlias')
             .send()
             .end((err, res) => {
               expect(res.status).to.equal(422);
@@ -89,7 +89,7 @@ describe('Middleware Tests:', function () {
       describe('Trying to delete an alias with a realEmail param, without an alias param test', function () {
         it('should be disallowed and the user should be told to provide both params', (done) => {
           chai.request(`localhost:${index.PORT}`)
-            .get('/delete/?realEmail=test@gmail.com')
+            .delete('/delete/?realEmail=test@gmail.com')
             .send()
             .end((err, res) => {
               expect(res.status).to.deep.equal(422);
@@ -105,7 +105,7 @@ describe('Middleware Tests:', function () {
     describe('Trying to submit a request with an invalid alias', function () {
       it('should be rejected with a message as to why', (done) => {
         chai.request(`localhost:${index.PORT}`)
-          .get('/add/?alias=@alias&realEmail=test@gmail.com')
+          .post('/add/?alias=@alias&realEmail=test@gmail.com')
           .send()
           .end((err, res) => {
             expect(res.status).to.deep.equal(422);
@@ -118,7 +118,7 @@ describe('Middleware Tests:', function () {
     describe('Trying to submit a request with an invalid email', function () {
       it('should be rejected with a message as to why', (done) => {
         chai.request(`localhost:${index.PORT}`)
-          .get('/add/?alias=alias111&realEmail=test')
+          .post('/add/?alias=alias111&realEmail=test')
           .send()
           .end((err, res) => {
             expect(res.status).to.deep.equal(422);
@@ -131,7 +131,7 @@ describe('Middleware Tests:', function () {
     describe('Trying to submit a request with a Pseudoname email (daisy-chain test)', function () {
       it('should be rejected with a message as to why', (done) => {
         chai.request(`localhost:${index.PORT}`)
-          .get(`/add/?alias=alias111&realEmail=test@${index.DOMAIN}`)
+          .post(`/add/?alias=alias111&realEmail=test@${index.DOMAIN}`)
           .send()
           .end((err, res) => {
             expect(res.status).to.deep.equal(422);
