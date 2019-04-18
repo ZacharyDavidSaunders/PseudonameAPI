@@ -1,5 +1,6 @@
 
 const express = require('express');
+const helmet = require('helmet');
 
 // The API's version
 const VERSION = '1.4';
@@ -13,6 +14,7 @@ const FORWARDMXAPIKEY = process.env.herokuForwardMXApiKey || process.env.localFo
 
 // Set up the express app
 const app = express();
+app.use(helmet());
 app.use(require('./routes.js'));
 
 app.listen(PORT, () => {
