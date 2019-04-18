@@ -109,6 +109,7 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 You'll find information about each release below.
 
 #### Version 1.4
+* Added the CONTRIBUTING.md file.
 * Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
 * Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
 * Made the CORS middleware reference the domain variable, not a hardcoded string.
