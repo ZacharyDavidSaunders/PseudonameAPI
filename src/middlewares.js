@@ -35,6 +35,11 @@ function validateParamsMiddleware(req, res, next) {
       success: 'FALSE',
       message: 'Error: The supplied realEmail parameter is invalid.',
     });
+  } else if (email.endsWith(index.DOMAIN)) {
+    res.status(422).send({
+      success: 'FALSE',
+      message: `Error: You may not daisy-chain aliases. Your provided realEmail may not end with ${index.DOMAIN}`,
+    });
   } else {
     next();
   }

@@ -110,6 +110,7 @@ You'll find information about each release below.
 
 #### Version 1.4
 * Added the CONTRIBUTING.md file.
+* Prevented the daisy-chaining of aliases.
 * Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
 * Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
 * Made the CORS middleware reference the domain variable, not a hardcoded string.

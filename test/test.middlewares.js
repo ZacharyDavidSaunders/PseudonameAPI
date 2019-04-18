@@ -128,5 +128,18 @@ describe('Middleware Tests:', function () {
           });
       });
     });
+    describe('Trying to submit a request with a Pseudoname email (daisy-chain test)', function () {
+      it('should be rejected with a message as to why', (done) => {
+        chai.request(`localhost:${index.PORT}`)
+          .get(`/add/?alias=alias111&realEmail=test@${index.DOMAIN}`)
+          .send()
+          .end((err, res) => {
+            expect(res.status).to.deep.equal(422);
+            expect(res.body).to.have.property('success', 'FALSE');
+            expect(res.body).to.have.property('message', `Error: You may not daisy-chain aliases. Your provided realEmail may not end with ${index.DOMAIN}`);
+            done();
+          });
+      });
+    });
   });
 });
