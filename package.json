@@ -5,7 +5,7 @@
   "main": "./src/index.js",
   "scripts": {
     "test": "npm install && mocha --recursive --exit",
-    "start": "./src/index.js"
+    "start": "npm install && node ./src/index.js"
   },
   "repository": {
     "type": "git",
