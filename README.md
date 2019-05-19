@@ -92,6 +92,8 @@ PseudonameAPI utilizes the following open source libraries:
 * [Mocha] — A feature-rich JavaScript unit-testing framework.
 * [Chai] — A BDD (Behavior-Driven Development) / TDD (Test-Driven-Development) assertion library for node.
 * [Chai-HTTP] — A Chai plug-in that enables Chai assertions to integrate with HTTP operations.
+* [Helmet.js] — A collection of security addons that can be toggled on/off together or in isolation.
+* [ESLint] — A linter that helps to enforce code style, structure, and ECMAScript compliance.
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
@@ -99,8 +101,7 @@ PseudonameAPI utilizes the following open source libraries:
 
 ## Pull Requests / Contributions
 
-Pull requests are welcome and will be reviewed and merged in a case-by-case basis. When submitting a PR, please update the tests as well.
-If a Pull Request is urgent, please send an email to contactus@pseudoname.io
+Please review the [CONTRIBUTING.md] document.
 
 ## To-Do's
  - Explore the possibility of encryption. —  _(This may require collaboration with ForwardMX)_
@@ -109,13 +110,14 @@ If a Pull Request is urgent, please send an email to contactus@pseudoname.io
 You'll find information about each release below.
 
 #### Version 1.4
+* Added [Helmet.js] for security.
 * Updated the API's HTTP methods (`/delete/` is now a DELETE, `/add/` is now a POST).
 * Added the [CONTRIBUTING.md] file.
 * Prevented the daisy-chaining of aliases.
 * Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
 * Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
 * Made the CORS middleware reference the domain variable, not a hardcoded string.
-* Retricted the methods allowed in the CORS middleware.
+* Restricted the methods allowed in the CORS middleware.
 * Added HTTP method logging to the logging middleware.
 * Removed the `remoteAddress` logging from the logging middleware (this was a duplicate of `req.ip` most of the time). 
 
@@ -164,3 +166,5 @@ You'll find information about each release below.
    [arrow image]:https://i1.wp.com/www.madisonracquet.com/wp-content/uploads/2011/12/1324494789_Arrow-Right.png?resize=128%2C128
    [Heroku Logo]:https://cdn.iconscout.com/icon/free/png-128/heroku-11-1175214.png
    [CONTRIBUTING.md]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/CONTRIBUTING.md
+   [Helmet.js]: https://github.com/helmetjs/helmet
+   [ESLint]: https://github.com/eslint/eslint
