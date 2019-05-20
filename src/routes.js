@@ -18,6 +18,7 @@ router.get('/', [
 
 // Add alias route
 router.post('/add/', [
+  middlewares.addApiLimiter,
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
@@ -58,6 +59,7 @@ router.post('/add/', [
 
 // Delete alias route
 router.delete('/delete/', [
+  middlewares.deleteApiLimiter,
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,

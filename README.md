@@ -62,11 +62,11 @@ Travis CI is used for continuous integration, the project page can be viewed [he
 
 ## Supported Routes
 
-| Route: | HTTP Method: | Usage: | Requires Parameters?: |
-|:----------:|:------------:|:-------------------------------------:|:--------------------:|
-| `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No |
-| `/add/` | POST | This route is used to create aliases. | Yes |
-| `/delete/` | DELETE | This route is used to delete aliases. | Yes |
+| Route: | HTTP Method: | Usage: | Requires Parameters?: | Is Rate-Limited?: |
+|:----------:|:------------:|:-------------------------------------:|:--------------------:|:--------------------:|
+| `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No | No |
+| `/add/` | POST | This route is used to create aliases. | Yes | Yes |
+| `/delete/` | DELETE | This route is used to delete aliases. | Yes | Yes |
 
 When using a route that requires parameters, the following parameters must be included in the request. If these parameters are not provided, the request will be refused:
 
@@ -81,6 +81,12 @@ The table below contains the response values (JSON keys) associated with each su
 |:----------:|------------|-------------------------------------|
 | `success` | `TRUE` or `FALSE` | This response value indicates whether the requested operation was performed successfully. |
 | `message` | Really anything. Each API call has a specific list of possible messages. | This response value provides other information that cannot be expressed in boolean logic. |
+
+## Rate-Limiting
+
+In an effort to keep the system running smoothly for all users, each IP address is only permitted to make 10 requests, per route, every 60 minutes.
+
+Please see the routes table above for information as to which routes are rate-limited.
 
 ## Dependencies
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
@@ -120,6 +126,7 @@ You'll find information about each release below.
 * Restricted the methods allowed in the CORS middleware.
 * Added HTTP method logging to the logging middleware.
 * Removed the `remoteAddress` logging from the logging middleware (this was a duplicate of `req.ip` most of the time). 
+* Added rate-limiting.
 
 #### Version 1.3
 * Added a simple logging middleware for diagnostic purposes.
