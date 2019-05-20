@@ -116,17 +116,20 @@ Please review the [CONTRIBUTING.md] document.
 You'll find information about each release below.
 
 #### Version 1.4
-* Added [Helmet.js] for security.
-* Updated the API's HTTP methods (`/delete/` is now a DELETE, `/add/` is now a POST).
-* Added the [CONTRIBUTING.md] file.
-* Prevented the daisy-chaining of aliases.
-* Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant.
+* Added [Helmet.js] for security. ([#8][issue8])
+* Added rate-limiting. ([#9][issue9])
+* Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant. ([#10][issue10])
+* Updated the API's HTTP methods (`/delete/` is now a DELETE, `/add/` is now a POST). ([#11][issue11])
+   * Updated the methods allowed in the CORS middleware.
+   * Updated tests.
+* Added the [CONTRIBUTING.md] file. ([#12][issue12])
+* Prevented the daisy-chaining of aliases. ([#13][issue13])
+   * Added tests.
+* Upgraded ES-Lint dependency per reports of security issues ([#16][issue16])
+* Fixed start script ([#21][issue21])
 * Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
-* Made the CORS middleware reference the domain variable, not a hardcoded string.
-* Restricted the methods allowed in the CORS middleware.
-* Added HTTP method logging to the logging middleware.
-* Removed the `remoteAddress` logging from the logging middleware (this was a duplicate of `req.ip` most of the time). 
-* Added rate-limiting.
+* Other small tweaks to logging.
+* Updated documentation.
 
 #### Version 1.3
 * Added a simple logging middleware for diagnostic purposes.
@@ -175,3 +178,12 @@ You'll find information about each release below.
    [CONTRIBUTING.md]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/CONTRIBUTING.md
    [Helmet.js]: https://github.com/helmetjs/helmet
    [ESLint]: https://github.com/eslint/eslint
+
+   [issue8]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/8
+   [issue9]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/9
+   [issue11]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/11
+   [issue10]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/10
+   [issue12]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/12
+   [issue13]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/13
+   [issue16]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/16
+   [issue21]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/21
