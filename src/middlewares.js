@@ -1,4 +1,30 @@
+const expressRateLimit = require('express-rate-limit');
 const index = require('./index');
+
+const permittedRequestsPerInterval = 10;
+const intervalMinutes = 60;
+const rateLimitRejectionMessage = {
+  success: 'FALSE',
+  message: `We have recieved too many requests from this IP address, in order to safegaurd the integrity of the PseudonameAPI system, future requests will be refused. Please try again after ${intervalMinutes} minutes. See the README for more information: https://github.com/ZacharyDavidSaunders/PseudonameAPI#rate-limiting`,
+};
+
+/* The rate limiter for the Add route.
+ * This is seperate from the other routes so calls to one route do not count towards the others.
+ * Having this sepertion also makes testing easier. */
+const addApiLimiter = expressRateLimit({
+  windowMs: intervalMinutes * 60 * 1000,
+  max: permittedRequestsPerInterval,
+  message: rateLimitRejectionMessage,
+});
+
+/* The rate limiter for the Delete route.
+ * This is seperate from the other routes so calls to one route do not count towards the others.
+ * Having this sepertion also makes testing easier. */
+const deleteApiLimiter = expressRateLimit({
+  windowMs: intervalMinutes * 60 * 1000,
+  max: permittedRequestsPerInterval,
+  message: rateLimitRejectionMessage,
+});
 
 function checkParamsMiddleware(req, res, next) {
   const requiredParams = ['alias', 'realEmail'];
@@ -61,3 +87,5 @@ module.exports.corsMiddleware = corsMiddleware;
 module.exports.checkParamsMiddleware = checkParamsMiddleware;
 module.exports.loggingMiddleware = loggingMiddleware;
 module.exports.validateParamsMiddleware = validateParamsMiddleware;
+module.exports.deleteApiLimiter = deleteApiLimiter;
+module.exports.addApiLimiter = addApiLimiter;

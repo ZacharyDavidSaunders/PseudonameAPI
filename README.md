@@ -84,7 +84,7 @@ The table below contains the response values (JSON keys) associated with each su
 
 ## Rate-Limiting
 
-In an effort to keep the system running smoothly for all users, each IP address is only permitted to make 5 requests, per route, every 30 minutes.
+In an effort to keep the system running smoothly for all users, each IP address is only permitted to make 10 requests, per route, every 60 minutes.
 
 Please see the routes table above for information as to which routes are rate-limited.
 
@@ -126,6 +126,7 @@ You'll find information about each release below.
 * Restricted the methods allowed in the CORS middleware.
 * Added HTTP method logging to the logging middleware.
 * Removed the `remoteAddress` logging from the logging middleware (this was a duplicate of `req.ip` most of the time). 
+* Added rate-limiting.
 
 #### Version 1.3
 * Added a simple logging middleware for diagnostic purposes.

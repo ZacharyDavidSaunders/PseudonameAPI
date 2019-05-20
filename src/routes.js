@@ -1,26 +1,10 @@
 
 const XMLHttpRequest = require('xmlhttprequest').XMLHttpRequest;
 const express = require('express');
-const expressRateLimit = require('express-rate-limit');
 const middlewares = require('./middlewares');
 const index = require('./index');
 
 const router = express.Router();
-
-const permittedRequestsPerInterval = 5;
-const intervalMinutes = 30;
-
-const apiLimiter = expressRateLimit({
-  windowMs: intervalMinutes * 60 * 1000, // 30 minutes
-  max: permittedRequestsPerInterval,
-  // the apiLimiter message response (the outer wrapper)
-  message:
-    {
-      success: 'FALSE',
-      // The json message within apiLimiter json response
-      message: 'We have recieved too many requests from this IP address, in order to safegaurd the integrity of the PseudonameAPI system, future requests will be refused. Please try again after 30 minutes. See the README for more information: https://github.com/ZacharyDavidSaunders/PseudonameAPI#rate-limiting',
-    },
-});
 
 // Empty route
 router.get('/', [
@@ -34,7 +18,7 @@ router.get('/', [
 
 // Add alias route
 router.post('/add/', [
-  apiLimiter,
+  middlewares.addApiLimiter,
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
@@ -75,7 +59,7 @@ router.post('/add/', [
 
 // Delete alias route
 router.delete('/delete/', [
-  apiLimiter,
+  middlewares.deleteApiLimiter,
   middlewares.loggingMiddleware,
   middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
