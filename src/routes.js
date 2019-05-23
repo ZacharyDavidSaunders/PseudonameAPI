@@ -8,8 +8,8 @@ const router = express.Router();
 
 // Empty route
 router.get('/', [
-  middlewares.loggingMiddleware,
-  middlewares.corsMiddleware], (req, res) => {
+  middlewares.corsMiddleware,
+  middlewares.loggingMiddleware], (req, res) => {
   res.status(200).send({
     success: 'TRUE',
     message: `You have reached ${index.NAME}v${index.VERSION}. Please see the API Documentation for more information: ${index.DOCUMENTATION}`,
@@ -18,9 +18,9 @@ router.get('/', [
 
 // Add alias route
 router.post('/add/', [
+  middlewares.corsMiddleware,
   middlewares.addApiLimiter,
   middlewares.loggingMiddleware,
-  middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
   middlewares.validateParamsMiddleware], (req, res) => {
   const realEmail = req.query.realEmail;
@@ -59,9 +59,9 @@ router.post('/add/', [
 
 // Delete alias route
 router.delete('/delete/', [
+  middlewares.corsMiddleware,
   middlewares.deleteApiLimiter,
   middlewares.loggingMiddleware,
-  middlewares.corsMiddleware,
   middlewares.checkParamsMiddleware,
   middlewares.validateParamsMiddleware], (req, res) => {
   const realEmail = req.query.realEmail;
