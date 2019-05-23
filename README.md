@@ -43,7 +43,7 @@ env
 ```
 7. If correct, you may then start the server via:
 ```sh
-node index.js
+node src/index.js
 ```
 8. _(Optional)_ Once the server is running, you can use [Postman][Postman] to craft requests, send requests, and view the server's responses.
 
@@ -62,11 +62,11 @@ Travis CI is used for continuous integration, the project page can be viewed [he
 
 ## Supported Routes
 
-| Route: | HTTP Method: | Usage: | Requires Parameters?: |
-|:----------:|:------------:|:-------------------------------------:|:--------------------:|
-| `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No |
-| `/add/` | GET | This route is used to create aliases. | Yes |
-| `/delete/` | GET | This route is used to delete aliases. | Yes |
+| Route: | HTTP Method: | Usage: | Requires Parameters?: | Is Rate-Limited?: |
+|:----------:|:------------:|:-------------------------------------:|:--------------------:|:--------------------:|
+| `/` | GET | This route verifies connectivity, displays the API name, version, and a link to the API documentation (what you're reading now). | No | No |
+| `/add/` | POST | This route is used to create aliases. | Yes | Yes |
+| `/delete/` | DELETE | This route is used to delete aliases. | Yes | Yes |
 
 When using a route that requires parameters, the following parameters must be included in the request. If these parameters are not provided, the request will be refused:
 
@@ -82,6 +82,12 @@ The table below contains the response values (JSON keys) associated with each su
 | `success` | `TRUE` or `FALSE` | This response value indicates whether the requested operation was performed successfully. |
 | `message` | Really anything. Each API call has a specific list of possible messages. | This response value provides other information that cannot be expressed in boolean logic. |
 
+## Rate-Limiting
+
+In an effort to keep the system running smoothly for all users, each IP address is only permitted to make 10 requests, per route, every 60 minutes.
+
+Please see the routes table above for information as to which routes are rate-limited.
+
 ## Dependencies
 In order to make use of the PseudonameAPI, a paid [ForwardMX] account is required. This service, which is programmatically interacted with, manages users' email aliases and provides the email forwarding/liaison service.
 
@@ -92,6 +98,8 @@ PseudonameAPI utilizes the following open source libraries:
 * [Mocha] — A feature-rich JavaScript unit-testing framework.
 * [Chai] — A BDD (Behavior-Driven Development) / TDD (Test-Driven-Development) assertion library for node.
 * [Chai-HTTP] — A Chai plug-in that enables Chai assertions to integrate with HTTP operations.
+* [Helmet.js] — A collection of security addons that can be toggled on/off together or in isolation.
+* [ESLint] — A linter that helps to enforce code style, structure, and ECMAScript compliance.
 
 "Thank you" to the developers and supporters of these projects, and all open source work for that matter. Without you, PseudonameAPI would not exist.
 
@@ -99,14 +107,29 @@ PseudonameAPI utilizes the following open source libraries:
 
 ## Pull Requests / Contributions
 
-Pull requests are welcome and will be reviewed and merged in a case-by-case basis. When submitting a PR, please update the tests as well.
-If a Pull Request is urgent, please send an email to contactus@pseudoname.io
+Please review the [CONTRIBUTING.md] document.
 
 ## To-Do's
  - Explore the possibility of encryption. —  _(This may require collaboration with ForwardMX)_
 
 ## Release Notes
 You'll find information about each release below.
+
+#### Version 1.4
+* Added [Helmet.js] for security. ([#8][issue8])
+* Added rate-limiting. ([#9][issue9])
+* Updated the codebase to be ECMAScript 8 / ECMAScript 2017 compliant. ([#10][issue10])
+* Updated the API's HTTP methods (`/delete/` is now a DELETE, `/add/` is now a POST). ([#11][issue11])
+   * Updated the methods allowed in the CORS middleware.
+   * Updated tests.
+* Added the [CONTRIBUTING.md] file. ([#12][issue12])
+* Prevented the daisy-chaining of aliases. ([#13][issue13])
+   * Added tests.
+* Upgraded ES-Lint dependency per reports of security issues ([#16][issue16])
+* Fixed start script ([#21][issue21])
+* Changed ES-Lint rules (AirBnB laid a good foundation, but some of their requirements, namely forced destructuring, made the codebase less readable).
+* Other small tweaks to logging.
+* Updated documentation.
 
 #### Version 1.3
 * Added a simple logging middleware for diagnostic purposes.
@@ -152,3 +175,15 @@ You'll find information about each release below.
    [Logo Mashup]:https://developerhowto.com/wp-content/uploads/2018/12/node-express-mocha-chai.png
    [arrow image]:https://i1.wp.com/www.madisonracquet.com/wp-content/uploads/2011/12/1324494789_Arrow-Right.png?resize=128%2C128
    [Heroku Logo]:https://cdn.iconscout.com/icon/free/png-128/heroku-11-1175214.png
+   [CONTRIBUTING.md]: https://github.com/ZacharyDavidSaunders/PseudonameAPI/blob/master/CONTRIBUTING.md
+   [Helmet.js]: https://github.com/helmetjs/helmet
+   [ESLint]: https://github.com/eslint/eslint
+
+   [issue8]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/8
+   [issue9]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/9
+   [issue11]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/11
+   [issue10]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/10
+   [issue12]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/12
+   [issue13]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/13
+   [issue16]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/16
+   [issue21]:https://github.com/ZacharyDavidSaunders/PseudonameAPI/issues/21
