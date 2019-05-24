@@ -16,7 +16,7 @@ const FORWARDMXAPIKEY = process.env.herokuForwardMXApiKey || process.env.localFo
 const app = express();
 
 // Required for rate-limiting behind a proxy (Heroku is considered a proxy).
-app.set('trust proxy', 1);
+// app.set('trust proxy', 1);
 
 app.use(helmet());
 app.use(require('./routes.js'));
