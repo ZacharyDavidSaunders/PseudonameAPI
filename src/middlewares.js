@@ -72,9 +72,8 @@ function validateParamsMiddleware(req, res, next) {
 }
 
 function corsMiddleware(req, res, next) {
-  const url = `https://${index.DOMAIN}`;
-  res.header('Access-Control-Allow-Origin', url);
-  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE');
+  res.header('Access-Control-Allow-Origin', index.DOMAIN);
+  res.header('Access-Control-Allow-Methods', 'GET,POST,DELETE,OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   next();
 }
