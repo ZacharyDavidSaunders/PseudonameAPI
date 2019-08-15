@@ -115,6 +115,9 @@ Please review the [CONTRIBUTING.md] document.
 ## Release Notes
 You'll find information about each release below.
 
+#### Version 1.5
+* Updated lodash dependency to address security concern (for more info, see https://github.com/lodash/lodash/pull/4336)
+
 #### Version 1.4
 * Added [Helmet.js] for security. ([#8][issue8])
 * Added rate-limiting. ([#9][issue9])
