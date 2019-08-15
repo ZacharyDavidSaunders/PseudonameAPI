@@ -3,7 +3,7 @@ const express = require('express');
 const helmet = require('helmet');
 
 // The API's version
-const VERSION = '1.4';
+const VERSION = '1.5';
 const DOMAIN = 'pseudoname.io';
 const NAME = 'PseudonameAPI';
 // This either uses the port assigned by Heroku or sets the port to 5000.
