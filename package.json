@@ -27,7 +27,7 @@
   "dependencies": {
     "chai": "^4.2.0",
     "chai-http": "^4.2.1",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-rate-limit": "^3.5.1",
     "helmet": "^3.16.0",
     "mocha": "^5.2.0",
